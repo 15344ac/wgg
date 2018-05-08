@@ -8,7 +8,7 @@ import { DataHora } from '../definicions/dataHora';
 })
 export class DataDetallsComponent implements OnInit {
 
-  @Input() data:DataHora
+  @Input() data: DataHora;
 
   constructor() { }
 

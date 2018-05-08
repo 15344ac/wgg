@@ -1,9 +1,8 @@
-import { Escenari } from "./escenari";
+import { Escenari } from './escenari';
 
-export class Joc
-{
+export class Joc {
     id: number;
     titol: string;
-    escenaris: Escenari[]
+    escenaris: Escenari[];
     bggID: string;
 }

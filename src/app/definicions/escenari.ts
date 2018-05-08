@@ -1,7 +1,6 @@
-import { Periode } from "./periode";
+import { Periode } from './periode';
 
-export class Escenari
-{
+export class Escenari {
     periodes: Periode[];
     descripcio: string;
     comentari: string;

@@ -23,11 +23,10 @@ export class JocDetallsComponent implements OnInit {
     this.getJoc();
   }
 
-  getJoc(): void 
-  {
+  getJoc(): void  {
     const id = +this.route.snapshot.paramMap.get('id');
 
-    this.wggService.getJoc(id).subscribe(joc => this.joc=joc);
+    this.wggService.getJoc(id).subscribe(joc => this.joc = joc);
   }
 
 }
