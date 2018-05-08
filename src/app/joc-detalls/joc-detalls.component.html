@@ -1,0 +1,11 @@
+<div *ngIf="joc">
+
+    <h2>{{ joc.titol | uppercase }} Details</h2>
+    <div><span>id: </span>{{joc.id}}</div>
+    <div>
+      <label>Títol:
+        <input [(ngModel)]="joc.titol" placeholder="títol"/>
+      </label>
+    </div>
+  
+  </div>

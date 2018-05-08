@@ -1,0 +1,10 @@
+<ul class="jocs">
+  <li *ngFor="let j of jocs">    
+      <a href="https://boardgamegeek.com/boardgame/{{j.bggID}}">{{j.titol}}</a>
+      <ul>
+        <li *ngFor="let escenari of consultaEscenaris(j)">
+          {{escenari.descripcio}}
+        </li>
+      </ul> 
+  </li>
+</ul>
