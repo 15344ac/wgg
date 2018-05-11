@@ -5,47 +5,74 @@ import {Joc} from './definicions/joc';
 import { MessageService } from './message.service';
 import { Periode } from './definicions/periode';
 import { Observable } from 'rxjs/Observable';
+import { DataHora } from './definicions/dataHora';
 
 @Injectable()
 export class WggService {
 
-  getJocs(filtreNom: string, periode: Periode,coincidents:boolean,inclouEscenaris:boolean,estricte:boolean): Observable<Joc[]>
-  {
-    this.messageService.add("Carregat");
+  private apiURL = 'http://localhost:15344/api';
 
-    let params=new HttpParams();
+  getJocs(filtreNom: string, periode: Periode, coincidents: boolean, inclouEscenaris: boolean, estricte: boolean): Observable<Joc[]> {
+    this.messageService.add('Carregat');
 
-    if (filtreNom)
-      params=params.set('nom',filtreNom);
+    let params = new HttpParams();
 
-    if (periode)
-      params=params.set('periode',periode.id.toString());
+    if (filtreNom) {
+      params = params.set('nom', filtreNom);
+    }
 
-      params=params
-      .set('coincidents',coincidents?"1" :"0")
-      .set('incloureEscenaris',inclouEscenaris? "1":"0")
-      .set('estricte',estricte? "1" :"0");
+    if (periode) {
+      params = params.set('periode', periode.id.toString());
+    }
+
+      params = params
+      .set('coincidents', coincidents ? '1' : '0')
+      .set('incloureEscenaris', inclouEscenaris ? '1' : '0')
+      .set('estricte', estricte ? '1' : '0');
 
 
-    return this.httpClient.get<Joc[]>(this.apiURL + "/Consulta Jocs/",{params: params}).pipe(
+    return this.httpClient.get<Joc[]>(this.apiURL + '/Consulta Jocs/', {params: params}).pipe(
       tap(jocs => this.log(`fetched jocs`)),
-      catchError(this.handleError('getJocs',[])));
+      catchError(this.handleError('getJocs', [])));
   }
 
-  getPares():Observable<Periode[]> {
-    this.messageService.add("Carregat");
-    return this.httpClient.get<Periode[]>(this.apiURL + "/Consulta Periodes").pipe(
+  getPeriodes(filtreNom: string, dataInici: DataHora, dataFi: DataHora): Observable<Periode[]> {
+    this.messageService.add('Carregat');
+
+    let params = new HttpParams();
+
+    if (filtreNom) {
+      params = params.set('nom', filtreNom);
+    }
+
+    if (dataInici) {
+      params = params.set('dataInici', dataInici.toString());
+    }
+
+    if (dataFi) {
+      params = params.set('dataFi', dataFi.toString());
+    }
+
+    return this.httpClient.get<Periode[]>(this.apiURL + '/Consulta Periodes/', {params: params}).pipe(
       tap(jocs => this.log(`fetched periodes`)),
-      catchError(this.handleError('getPeriodes',[])));
+      catchError(this.handleError('getPeriodes', [])));
+  }
+
+  getPares(): Observable<Periode[]> {
+    console.log('Carregat');
+    this.messageService.add('Carregat');
+    return this.httpClient.get<Periode[]>(this.apiURL + '/Consulta Periodes Base').pipe(
+      tap(jocs => this.log(`fetched periodes`)),
+      catchError(this.handleError('getPeriodesBase', [])));
   }
 
   getJoc(id: number): Observable<Joc> {
     return null;
   }
 
-  getPeriode(id: number):Observable<Periode> {
+  getPeriode(id: number): Observable<Periode> {
     this.messageService.add('Carregat');
-    return this.httpClient.get<Periode>(this.apiURL+'/Consulta Periode/' + id).pipe(
+    return this.httpClient.get<Periode>(this.apiURL + '/Consulta Periode/' + id).pipe(
       tap(periode => this.log('fetched periode')),
       catchError(this.handleError('getPeriode', null)));
   }
@@ -71,6 +98,4 @@ export class WggService {
       return error;
     };
   }
-
-  private apiURL = 'http://localhost:15344/api';
 }

@@ -9,28 +9,15 @@ import { Periode } from '../definicions/periode';
   styleUrls: [ './main.component.css' ]
 })
 export class MainComponent implements OnInit {
-  jocs: Joc[] = [];
 
-  periodeSeleccionat: Periode
-  periodes:Periode[]
+  periodes: Periode[];
   constructor(private wggService: WggService) { }
 
   ngOnInit() {
     this.getPares();
   }
 
-  getPares(): void
-  {
-    this.wggService.getPares().subscribe(pares => this.periodes=pares);
-  }
-
-  getPeriode(id): void
-  {
-    this.wggService.getPeriode(id).subscribe(periode => this.periodeSeleccionat=periode);
-  }
-
-  getJocs(): void {
-    this.wggService.getJocs(null,null,false,true,false)
-      .subscribe(jocs => this.jocs = jocs.slice(1, 5));
+  getPares(): void  {
+    this.wggService.getPares().subscribe(pares => this.periodes = pares);
   }
 }

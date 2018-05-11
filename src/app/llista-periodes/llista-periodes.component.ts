@@ -10,12 +10,12 @@ import { Periode } from '../definicions/periode';
 
 export class LlistaPeriodesComponent implements OnInit {
 
-@Input() periodes:Periode[]
+@Input() periodes: Periode[];
 
-  constructor() {     
+  constructor() {
   }
 
   ngOnInit() {
-  }
+    }
 
 }

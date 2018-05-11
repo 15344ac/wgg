@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, Input } from '@angular/core';
 import { Periode } from './definicions/periode';
 import { WggService } from './wgg.service';
+import {CdkTableModule} from '@angular/cdk/table';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @Component({
@@ -10,15 +13,10 @@ import { WggService } from './wgg.service';
 })
 export class AppComponent {
   title = 'Provant WGG';
-  periodes: Periode[];
+  events: string[] = [];
+  opened: boolean = true;
 
-  constructor(private wggService: WggService) {}
-
-    OnInit() {
-    this.getPares();
-  }
-
-  getPares(): void {
-    this.wggService.getPares().subscribe(pares => this.periodes = pares);
+  constructor(private wggService: WggService) {
+    console.log('Iniciat');
   }
 }

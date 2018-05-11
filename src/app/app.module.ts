@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import {WggService} from './wgg.service';
 
 
@@ -16,6 +16,43 @@ import { PeriodeDetallsComponent } from './periode-detalls/periode-detalls.compo
 import { LlistaPeriodesComponent } from './llista-periodes/llista-periodes.component';
 import { DataDetallsComponent } from './data-detalls/data-detalls.component';
 import { PeriodeLlistaComponent } from './periode-llista/periode-llista.component';
+import { ParesComponent } from './pares/pares.component';
+import { BarraNavegacioComponent } from './barra-navegacio/barra-navegacio.component';
+import {
+  MatAutocompleteModule,
+    MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  } from '@angular/material';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,9 +64,13 @@ import { PeriodeLlistaComponent } from './periode-llista/periode-llista.componen
     PeriodeDetallsComponent,
     LlistaPeriodesComponent,
     DataDetallsComponent,
-    PeriodeLlistaComponent
+    PeriodeLlistaComponent,
+    ParesComponent,
+    BarraNavegacioComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    MatSidenavModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,

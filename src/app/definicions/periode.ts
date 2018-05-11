@@ -6,5 +6,5 @@ export class Periode {
     dataFi: DataHora;
     titol: string;
     descripcio: string;
-    Fills: Periode[];
+    fills: Periode[];
 }

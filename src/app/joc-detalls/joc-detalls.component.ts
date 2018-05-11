@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import {Joc} from '../definicions/joc';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
