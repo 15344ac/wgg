@@ -36,7 +36,7 @@ export class WggService {
       catchError(this.handleError('getJocs', [])));
   }
 
-  getPeriodes(filtreNom: string, dataInici: DataHora, dataFi: DataHora): Observable<Periode[]> {
+  getPeriodes(filtreNom: string, dataInici: string, dataFi: string): Observable<Periode[]> {
     this.messageService.add('Carregat');
 
     let params = new HttpParams();
@@ -58,11 +58,18 @@ export class WggService {
       catchError(this.handleError('getPeriodes', [])));
   }
 
+  getParesPeriode(id: number): Observable<Periode[]> {
+    console.log('Carregat');
+    return this.httpClient.get<Periode[]>(this.apiURL + '/Consulta Pare/' + id).pipe(
+      tap(periodes => this.log('fetched pares')),
+      catchError(this.handleError('getParesJoc', null)));
+  }
+
   getPares(): Observable<Periode[]> {
     console.log('Carregat');
     this.messageService.add('Carregat');
     return this.httpClient.get<Periode[]>(this.apiURL + '/Consulta Periodes Base').pipe(
-      tap(jocs => this.log(`fetched periodes`)),
+      tap(periodes => this.log(`fetched periodes`)),
       catchError(this.handleError('getPeriodesBase', [])));
   }
 

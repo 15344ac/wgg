@@ -5,4 +5,5 @@ export class Joc {
     titol: string;
     escenaris: Escenari[];
     bggID: string;
+    comentari: string;
 }

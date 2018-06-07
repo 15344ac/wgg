@@ -14,9 +14,13 @@ import {HttpClientModule} from '@angular/common/http';
 export class AppComponent {
   title = 'Provant WGG';
   events: string[] = [];
-  opened: boolean = true;
+  opened = true;
 
   constructor(private wggService: WggService) {
     console.log('Iniciat');
+  }
+
+  tanca() {
+    this.opened = false;
   }
 }

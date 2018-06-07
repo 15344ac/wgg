@@ -1,6 +1,16 @@
 <ul class="jocs">
   <li *ngFor="let j of jocs">    
-      <a href="https://boardgamegeek.com/boardgame/{{j.bggID}}">{{j.titol}}</a>
+      <a href="https://boardgamegeek.com/boardgame/{{j.bggID}}" target="_blank">
+        <details *ngIf="j.comentari; else nomestitol">
+          <summary>    
+          {{j.titol}}          
+          </summary>
+          <div [innerHTML]="j.comentari"></div>
+          </details>
+          <ng-template #nomestitol>      
+            {{j.titol}}            
+            </ng-template>  
+        </a>
       <ul>
         <li *ngFor="let escenari of consultaEscenaris(j)">
           {{escenari.descripcio}}

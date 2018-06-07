@@ -3,20 +3,30 @@ nav
 {
     float: left;
     border-width: 0.25%;
-    padding-right: 1.5em;    
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    margin:0;
+    padding: 0.25%;  
+    margin: 0.25%;
     border-color: black;
     border-style: inset;
     width: 25%;    
-    background: whitesmoke
+    background: whitesmoke;    
+}
+
+header
+{
+    float:left;
 }
 
 article
 {        
-    margin-left: 15em;
-    padding-left: 10em;    
+    float: left;        
+    width: 60%;    
+}
+
+.boto-barra
+{
+    float: right;
+    color: red;
+    cursor: pointer;
 }
 
 

@@ -15,6 +15,7 @@ import { Joc } from '../definicions/joc';
 export class PeriodeDetallsComponent implements OnInit {
 
   periode: Periode;
+  pares: Periode[];
 
   jocsPrincipals: Joc[];
   jocsEscenaris: Joc[];
@@ -34,6 +35,7 @@ export class PeriodeDetallsComponent implements OnInit {
   getPeriode(): void {
     this.route.params.subscribe(routeParams =>      {
         const id = routeParams.id;
+        this.wggService.getParesPeriode(id).subscribe(pares => this.pares = pares);
         this.wggService.getPeriode(id).subscribe(periode =>           {
             this.periode = periode;
             this.wggService.getJocs(null, periode, true, false, true).subscribe(jocs => this.jocsPrincipals = jocs);

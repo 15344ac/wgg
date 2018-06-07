@@ -1,2 +1,4 @@
-<input type="text" [(ngModel)]="filtreNom" placeholder="filtro" ng-required="false">
+<p><input type="text" [(ngModel)]="filtreNom" placeholder="filtro" ng-required="false"/></p>
+<p>De:<input type="text" [(ngModel)]="filtreDataInici" placeholder="fecha" ng-required="false"/></p>
+<p>A:<input type="text" [(ngModel)]="filtreDataFi" placeholder="fecha" ng-required="false"/></p>
 <app-llista-periodes [periodes]=periodes></app-llista-periodes>

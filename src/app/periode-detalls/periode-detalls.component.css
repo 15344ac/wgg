@@ -1,9 +1,14 @@
-nav
-{
-    float: right;
-}
 
-article
+.enllaços
 {
     float:left;
+    margin-left: 5%;
 }
+
+section
+{        
+    float:left;
+    overflow: auto;
+    clear: both;
+}
+

@@ -1,16 +1,47 @@
-<div *ngIf="periode; else faltaPeriode">         
-        <div><span>id: </span>{{periode.id}}</div>
-        <h1>{{periode.titol}}</h1>        
-        <div>{{periode.descripcio}}</div>
-        <article>
+<div *ngIf="periode; else faltaPeriode">     
+
+<nav>
+<div class="enllaços">    
+  <p *ngFor="let p of pares">    
+    <a routerLink="/periode/{{p.id}}">
+      {{p.titol}}</a>
+      <span class="data"  >
+        <app-data-detalls  [data]=p.dataInici></app-data-detalls>
+         &ensp;
+         <app-data-detalls  [data]=p.dataFi></app-data-detalls>
+       </span> 
+  </p>
+</div> 
+
+<div class="enllaços">    
+  <p *ngFor="let p of periode.fills">    
+      <a routerLink="/periode/{{p.id}}">
+        {{p.titol}}</a>
+        <span class="data"  >
+          <app-data-detalls  [data]=p.dataInici></app-data-detalls>
+           &ensp;
+           <app-data-detalls  [data]=p.dataFi></app-data-detalls>
+         </span> 
+    </p>    
+  </div>                
+</nav>  
+
+<section>
+  <h1>{{periode.titol}} <span class="data"  >
+      <app-data-detalls  [data]=periode.dataInici></app-data-detalls>
+      &ensp;
+      <app-data-detalls  [data]=periode.dataFi></app-data-detalls>
+         </span> 
+  </h1>        
+        <div>{{periode.descripcio}}</div>           
+        
+        <p class="descripcio">
           <app-llista-jocs [jocs]="jocsPrincipals"></app-llista-jocs>
           <app-llista-jocs [jocs]="jocsEscenaris" [periode]="periode"></app-llista-jocs>
           <app-llista-jocs [jocs]="jocsEpoca"></app-llista-jocs>
           <app-llista-jocs [jocs]="jocsEpocaEscenaris" [periode]="periode"></app-llista-jocs>
-      </article>
-        <nav>
-          <app-llista-periodes [periodes]="periode.fills"></app-llista-periodes>
-        </nav>
+        </p>                         
+      </section>   
 </div>
 <ng-template #faltaPeriode>
   Periode no seleccionat

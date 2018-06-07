@@ -3,6 +3,7 @@ import {Joc} from '../definicions/joc';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { WggService} from '../wgg.service';
+import { Periode } from '../definicions/periode';
 
 @Component({
   selector: 'app-joc-detalls',

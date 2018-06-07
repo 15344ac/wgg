@@ -3,9 +3,19 @@
         
 </header>       
 <body>
-<nav>
-        <app-barra-navegacio></app-barra-navegacio>
-</nav>
+
+        <ng-container *ngIf="opened; else closedTemplate">               
+                <nav>         
+                        <button (click)="opened=false" class="boto-barra">X</button>
+                        <app-barra-navegacio></app-barra-navegacio>
+                </nav>
+        </ng-container>
+        <ng-template #closedTemplate>
+                <header>
+                        <button (click)="opened=true" class="boto-barra">-></button>
+                </header>
+        </ng-template>
+
 <article>
        <div>
         <router-outlet></router-outlet>        
@@ -13,6 +23,6 @@
 </article>
 </body>
 <footer>
-<app-messages></app-messages>
+
 </footer>
 
