@@ -21,6 +21,12 @@ app-llista-jocs
   white-space: nowrap;
 }
 
+.numero
+{
+  font-size: smaller;
+  font-weight: bolder;
+}
+
 li.nomostra:hover,li.mostra:hover,li.final:hover
 {
   background-color: lightgray;
