@@ -73,6 +73,11 @@ export class WggService {
       catchError(this.handleError('getPeriodesBase', [])));
   }
 
+  getNumeroJocs(id: number): Observable<number> {
+    return this.httpClient.get<number>(this.apiURL + '/Numero Jocs Periode/' + id).pipe(
+      catchError(this.handleError('numeroJocs', null)));
+  }
+
   getJoc(id: number): Observable<Joc> {
     return null;
   }

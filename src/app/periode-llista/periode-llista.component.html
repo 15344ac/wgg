@@ -10,7 +10,7 @@
     &ensp;
     <app-data-detalls  [data]=periode.dataFi></app-data-detalls>
   </span>
-  <span class="numero">[{{jocs.length}}]</span>
+  <span class="numero">[{{numeroJocs}}]</span>
   </li>    
     <app-llista-periodes *ngIf="mostra && periode.fills.length>0" [periodes]=periode.fills></app-llista-periodes>    
     <!--<app-llista-jocs *ngIf="mostra && jocs && jocs.length>0" [jocs]=jocs [periode]=periode></app-llista-jocs>-->

@@ -10,27 +10,29 @@ import { WggService } from '../wgg.service';
 })
 export class PeriodeLlistaComponent implements OnInit {
 
-  @Input() periode:Periode
+  @Input() periode: Periode;
 
-  mostra:Boolean;
+  mostra: Boolean;
 
-  jocs: Joc[]
+  jocs: Joc [];
 
-  OnMostra()
-  {
-    if (this.mostra)
-      this.mostra=false;
-    else this.mostra=true;
+  numeroJocs: number;
+
+  OnMostra() {
+    if (this.mostra) {
+      this.mostra = false;
+    } else { this.mostra = true; }
   }
 
-  constructor(private wggService: WggService) { 
-    
+  constructor(private wggService: WggService) {
+
   }
 
 
 
   ngOnInit() {
-    this.wggService.getJocs(null,this.periode,true,false,false).subscribe(jocs => this.jocs=jocs);    
+    this.wggService.getNumeroJocs(this.periode.id).subscribe(numero => this.numeroJocs = numero);
+    this.wggService.getJocs(null, this.periode, true, false, false).subscribe(jocs => this.jocs = jocs);
   }
 
 }
