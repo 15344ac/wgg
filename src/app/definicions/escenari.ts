@@ -5,4 +5,5 @@ export class Escenari {
     descripcio: string;
     comentari: string;
     coincideix: boolean;
+    nota: string;
 }

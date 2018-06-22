@@ -16,29 +16,55 @@ export class LlistaJocsComponent implements OnInit {
 
 @Input() periode: Periode;
 
-consultaEscenaris(joc:Joc):Escenari[]
-{
-  if (!this.periode)
-    return null;
+jocSeleccionat: Joc;
 
-  return joc.escenaris.filter(escenari => escenari.periodes.some(periode =>
-    {
-      if (periode) 
-        return periode.id==this.periode.id
-      else return false;
+consultaNota(joc: Joc): string {
+  if (joc.escenariUnic) {
+    return joc.escenariUnic.nota;
+  }
+
+  if (!this.periode) {
+    return null;
+  }
+
+  const escenaris = this.consultaEscenaris(joc);
+
+  let nota = null;
+
+  escenaris.forEach(element => {
+      if (element.nota) {
+        if (nota) {
+          if (element.nota < nota)          {
+            nota = element.nota;
+          }
+        } else {
+          nota = element.nota;
+        }
+      }
+  });
+
+  return nota;
+}
+
+consultaEscenaris(joc: Joc): Escenari[] {
+  if (!this.periode) {
+    return null;
+  }
+
+  return joc.escenaris.filter(escenari => escenari.periodes.some(periode => {
+      if (periode) {
+        return periode.id === this.periode.id;
+      } else { return false; }
     }));
   }
 
-  jocSeleccionat: Joc;
-
   onSelect(joc: Joc):
-  void 
-  {
-    this.jocSeleccionat=joc;
+  void {
+    this.jocSeleccionat = joc;
   }
 
-  constructor(private wggService: WggService) { 
-    
+  constructor(private wggService: WggService) {
+
   }
 
   ngOnInit() {

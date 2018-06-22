@@ -1,4 +1,37 @@
 /* jocsComponent's private CSS styles */
+
+
+.NotaA
+{
+  background-color: lightgreen;
+}
+
+.NotaB
+{
+  background-color: lightblue;
+}
+
+.NotaC
+{
+  background-color: lightgray;
+}
+
+.NotaD
+{
+  background-color: lightcoral;
+}
+
+.NotaE
+{
+  background-color: red;
+}
+
+.Nota
+{
+  background-color:whitesmoke;
+}
+
+
 .selected {
     background-color: #CFD8DC !important;
     color: white;
@@ -15,7 +48,6 @@
     cursor: pointer;
     position: relative;
     left: 0;
-    background-color: #EEE;
     margin: .5em;
     padding: .3em 0;    
     border-radius: 4px;
@@ -47,7 +79,7 @@
     border-radius: 4px 0 0 4px;
   }
   .jocs a {
-    color: #888;
+    color:black;
     text-decoration: none;
     position: relative;
     display: block;

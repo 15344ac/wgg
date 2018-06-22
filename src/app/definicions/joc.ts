@@ -6,4 +6,5 @@ export class Joc {
     escenaris: Escenari[];
     bggID: string;
     comentari: string;
+    escenariUnic: Escenari;
 }
