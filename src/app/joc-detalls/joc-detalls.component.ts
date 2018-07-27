@@ -16,8 +16,7 @@ export class JocDetallsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private wggService: WggService,
-    private location: Location
+    private wggService: WggService
   ) { }
 
   ngOnInit() {

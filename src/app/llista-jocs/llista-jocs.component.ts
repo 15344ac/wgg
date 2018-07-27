@@ -16,6 +16,9 @@ export class LlistaJocsComponent implements OnInit {
 
 @Input() periode: Periode;
 
+@Input() permetEditar: boolean;
+
+
 jocSeleccionat: Joc;
 
 consultaNota(joc: Joc): string {
