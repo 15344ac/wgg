@@ -3,7 +3,7 @@
 <nav>
 <div class="enllaços">    
   <p *ngFor="let p of pares">    
-    <a routerLink="/periode/{{p.id}}">
+    <a routerLink="/{{user}}/periode/{{p.id}}">
       {{p.titol}}</a>
       <span class="data"  >
         <app-data-detalls  [data]=p.dataInici></app-data-detalls>
@@ -15,7 +15,7 @@
 
 <div class="enllaços">    
   <p *ngFor="let p of periode.fills">    
-      <a routerLink="/periode/{{p.id}}">
+      <a routerLink="/{{user}}/periode/{{p.id}}">
         {{p.titol}}</a>
         <span class="data"  >
           <app-data-detalls  [data]=p.dataInici></app-data-detalls>

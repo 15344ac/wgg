@@ -24,8 +24,11 @@ export class AppComponent {
     console.log('Iniciat');
     route.events.subscribe(e =>  {
       if (e instanceof NavigationEnd)      {
-        console.log('Nova ruta: ' + e.url + ' - ' + route.parseUrl(e.url).root.children[PRIMARY_OUTLET].segments[0]);
-        this.user = route.parseUrl(e.url).root.children[PRIMARY_OUTLET].segments[0].toString();
+        const children = route.parseUrl(e.url).root.children[PRIMARY_OUTLET];
+        if (children) {
+          console.log('Nova ruta: ' + e.url + ' - ' + children.segments[0]);
+          this.user = children.segments[0].toString();
+        }
       }
     });
   }

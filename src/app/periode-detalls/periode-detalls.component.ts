@@ -21,6 +21,7 @@ export class PeriodeDetallsComponent implements OnInit {
   jocsEscenaris: Joc[];
   jocsEpoca: Joc[];
   jocsEpocaEscenaris: Joc[];
+  user: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +37,7 @@ export class PeriodeDetallsComponent implements OnInit {
     this.route.params.subscribe(routeParams =>      {
         const id = routeParams.id;
         const user = routeParams.user;
+        this.user = user;
         this.wggService.getParesPeriode(user, id).subscribe(pares => this.pares = pares);
         this.wggService.getPeriode(user, id).subscribe(periode =>           {
             this.periode = periode;

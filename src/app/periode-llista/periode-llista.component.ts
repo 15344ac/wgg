@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Periode } from '../definicions/periode';
 import { Joc } from '../definicions/joc';
 import { WggService } from '../wgg.service';
-import { ActivatedRoute } from '@angular/router';
+import { NumeroJocs } from '../definicions/numeroJocs';
 
 @Component({
   selector: 'app-periode-llista',
@@ -19,7 +19,7 @@ export class PeriodeLlistaComponent implements OnInit {
 
   jocs: Joc [];
 
-  numeroJocs: number;
+  numeroJocs: NumeroJocs;
 
   OnMostra() {
     if (this.mostra) {

@@ -5,8 +5,7 @@ import {Joc} from './definicions/joc';
 import { MessageService } from './message.service';
 import { Periode } from './definicions/periode';
 import { Observable } from 'rxjs/Observable';
-import { DataHora } from './definicions/dataHora';
-import { getUrlScheme } from '@angular/compiler';
+import { NumeroJocs } from './definicions/numeroJocs';
 
 @Injectable()
 export class WggService {
@@ -83,7 +82,7 @@ export class WggService {
     }
   }
 
-  getNumeroJocs(idUser: string, id: number): Observable<number> {
+  getNumeroJocs(idUser: string, id: number): Observable<NumeroJocs> {
     return this.httpClient.get<number>(this.getUrl(idUser) + '/Numero Jocs Periode/' + id).pipe(
       catchError(this.handleError('numeroJocs', null)));
   }
