@@ -6,13 +6,13 @@ import { MessageService } from './message.service';
 import { Periode } from './definicions/periode';
 import { Observable } from 'rxjs/Observable';
 import { DataHora } from './definicions/dataHora';
+import { getUrlScheme } from '@angular/compiler';
 
 @Injectable()
 export class WggService {
 
-  private apiURL = 'http://localhost:15344/api';
-
-  getJocs(filtreNom: string, periode: Periode, coincidents: boolean, inclouEscenaris: boolean, estricte: boolean): Observable<Joc[]> {
+  getJocs(idUser: string, filtreNom: string, periode: Periode, coincidents: boolean, inclouEscenaris: boolean, estricte: boolean)
+    : Observable<Joc[]> {
     this.messageService.add('Carregat');
 
     let params = new HttpParams();
@@ -31,12 +31,12 @@ export class WggService {
       .set('estricte', estricte ? '1' : '0');
 
 
-    return this.httpClient.get<Joc[]>(this.apiURL + '/Consulta Jocs/', {params: params}).pipe(
+    return this.httpClient.get<Joc[]>(this.getUrl(idUser) + '/Consulta Jocs/', {params: params}).pipe(
       tap(jocs => this.log(`fetched jocs`)),
       catchError(this.handleError('getJocs', [])));
   }
 
-  getPeriodes(filtreNom: string, dataInici: string, dataFi: string): Observable<Periode[]> {
+  getPeriodes(idUser: string, filtreNom: string, dataInici: string, dataFi: string, filtreJocs: string): Observable<Periode[]> {
     this.messageService.add('Carregat');
 
     let params = new HttpParams();
@@ -53,45 +53,60 @@ export class WggService {
       params = params.set('dataFi', dataFi.toString());
     }
 
-    return this.httpClient.get<Periode[]>(this.apiURL + '/Consulta Periodes/', {params: params}).pipe(
+    if (filtreJocs) {
+      params = params.set('joc', filtreJocs);
+    }
+
+    return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Periodes/', {params: params}).pipe(
       tap(jocs => this.log(`fetched periodes`)),
       catchError(this.handleError('getPeriodes', [])));
   }
 
-  getParesPeriode(id: number): Observable<Periode[]> {
+  getParesPeriode(idUser: string, id: number): Observable<Periode[]> {
     console.log('Carregat');
-    return this.httpClient.get<Periode[]>(this.apiURL + '/Consulta Pare/' + id).pipe(
+    return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Pare/' + id).pipe(
       tap(periodes => this.log('fetched pares')),
       catchError(this.handleError('getParesJoc', null)));
   }
 
-  getPares(): Observable<Periode[]> {
+  getPares(idUser: string, filtreJocs: string): Observable<Periode[]> {
     console.log('Carregat');
     this.messageService.add('Carregat');
-    return this.httpClient.get<Periode[]>(this.apiURL + '/Consulta Periodes Base').pipe(
-      tap(periodes => this.log(`fetched periodes`)),
-      catchError(this.handleError('getPeriodesBase', [])));
+    if (filtreJocs) {
+      return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Periodes Base/' + filtreJocs).pipe(
+        tap(periodes => this.log(`fetched periodes`)),
+        catchError(this.handleError('getPeriodesBase', [])));
+    } else {
+      return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Periodes Base').pipe(
+        tap(periodes => this.log(`fetched periodes`)),
+        catchError(this.handleError('getPeriodesBase', [])));
+    }
   }
 
-  getNumeroJocs(id: number): Observable<number> {
-    return this.httpClient.get<number>(this.apiURL + '/Numero Jocs Periode/' + id).pipe(
+  getNumeroJocs(idUser: string, id: number): Observable<number> {
+    return this.httpClient.get<number>(this.getUrl(idUser) + '/Numero Jocs Periode/' + id).pipe(
       catchError(this.handleError('numeroJocs', null)));
   }
 
-  getJoc(id: number): Observable<Joc> {
+  getJoc(idUser: string, id: number): Observable<Joc> {
     return null;
   }
 
-  getPeriode(id: number): Observable<Periode> {
+  getPeriode(idUser: string, id: number): Observable<Periode> {
     this.messageService.add('Carregat');
-    return this.httpClient.get<Periode>(this.apiURL + '/Consulta Periode/' + id).pipe(
+    return this.httpClient.get<Periode>(this.getUrl(idUser) + '/Consulta Periode/' + id).pipe(
       tap(periode => this.log('fetched periode')),
       catchError(this.handleError('getPeriode', null)));
   }
 
+  getUrl(idUser: string): string {
+    return 'http://localhost:15344/api/' + idUser;
+  }
+
   constructor(private messageService: MessageService,
     private httpClient: HttpClient
-  ) { }
+  ) {
+  }
 
   private log(message: string) {
     this.messageService.add('JocService: ' + message);

@@ -12,6 +12,8 @@ export class LlistaPeriodesComponent implements OnInit {
 
 @Input() periodes: Periode[];
 
+@Input() user: String;
+
   constructor() {
   }
 

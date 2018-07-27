@@ -7,15 +7,14 @@ import { PeriodeDetallsComponent } from './periode-detalls/periode-detalls.compo
 
 
 const routes: Routes = [
-  { path: 'jocs', component: LlistaJocsComponent },
-  {path: 'main', component: MainComponent},
-  { path: '', redirectTo: '/main', pathMatch: 'full' },
-  {path: 'periode/:id', component: PeriodeDetallsComponent}
+  {path: ':user', component: MainComponent, runGuardsAndResolvers: 'always'},
+  { path: ':user/jocs', component: LlistaJocsComponent, runGuardsAndResolvers: 'always' },
+  {path: ':user/periode/:id', component: PeriodeDetallsComponent, runGuardsAndResolvers: 'always'},
 ];
 
 
 @NgModule({
   exports: [RouterModule],
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}) ],
 })
 export class AppRoutingModule { }

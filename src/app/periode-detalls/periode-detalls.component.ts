@@ -35,13 +35,14 @@ export class PeriodeDetallsComponent implements OnInit {
   getPeriode(): void {
     this.route.params.subscribe(routeParams =>      {
         const id = routeParams.id;
-        this.wggService.getParesPeriode(id).subscribe(pares => this.pares = pares);
-        this.wggService.getPeriode(id).subscribe(periode =>           {
+        const user = routeParams.user;
+        this.wggService.getParesPeriode(user, id).subscribe(pares => this.pares = pares);
+        this.wggService.getPeriode(user, id).subscribe(periode =>           {
             this.periode = periode;
-            this.wggService.getJocs(null, periode, true, false, true).subscribe(jocs => this.jocsPrincipals = jocs);
-            this.wggService.getJocs(null, periode, true, true, true).subscribe(jocs => this.jocsEscenaris = jocs);
-            this.wggService.getJocs(null, periode, false, false, true).subscribe(jocs => this.jocsEpoca = jocs);
-            this.wggService.getJocs(null, periode, false, true, true).subscribe(jocs => this.jocsEpocaEscenaris = jocs);
+            this.wggService.getJocs(user, null, periode, true, false, true).subscribe(jocs => this.jocsPrincipals = jocs);
+            this.wggService.getJocs(user, null, periode, false, false, true).subscribe(jocs => this.jocsEpoca = jocs);
+            this.wggService.getJocs(user, null, periode, true, true, true).subscribe(jocs => this.jocsEscenaris = jocs);
+            this.wggService.getJocs(user, null, periode, false, true, true).subscribe(jocs => this.jocsEpocaEscenaris = jocs);
           });
       });
   }

@@ -3,11 +3,11 @@
         
 </header>       
 <body>
-
+    <div *ngIf="user">
         <ng-container *ngIf="opened; else closedTemplate">               
                 <nav>         
                         <button (click)="opened=false" class="boto-barra">X</button>
-                        <app-barra-navegacio></app-barra-navegacio>
+                        <app-barra-navegacio [user]=user></app-barra-navegacio>
                 </nav>
         </ng-container>
         <ng-template #closedTemplate>
@@ -15,14 +15,13 @@
                         <button (click)="opened=true" class="boto-barra">-></button>
                 </header>
         </ng-template>
-
+    </div>
 <article>
-       <div>
-        <router-outlet></router-outlet>        
-        </div>
+<div>
+<router-outlet></router-outlet>
+</div>
 </article>
 </body>
 <footer>
 
 </footer>
-

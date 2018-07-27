@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { WggService } from '../wgg.service';
 import { Periode } from '../definicions/periode';
 import { DataHora } from '../definicions/dataHora';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-barra-navegacio',
@@ -14,6 +15,14 @@ export class BarraNavegacioComponent implements OnInit {
   nom: string;
   dataI: string;
   dataF: string;
+  joc: string;
+  @Input() user: string;
+
+  @Input()
+  set filtreJoc(filtre: string) {
+    this.joc = filtre;
+    this.getPeriodes();
+  }
 
   @Input()
   set filtreNom(filtre: string)  {
@@ -33,6 +42,11 @@ export class BarraNavegacioComponent implements OnInit {
     this.getPeriodes();
   }
 
+
+  setPeriodes(periodes: Periode[]) {
+    this.periodes = periodes;
+  }
+
   getPeriodes(): void {
     if (
     ((this.nom) && (this.nom.length > 0))
@@ -40,21 +54,21 @@ export class BarraNavegacioComponent implements OnInit {
     ((this.dataI) && (this.dataI.length > 0))
     ||
     ((this.dataF) && (this.dataF.length > 0))
-     ) {
-      this.wggService.getPeriodes(this.nom, this.dataI, this.dataF).subscribe(llegit => this.periodes = llegit);
+    ) {
+      this.wggService.getPeriodes(this.user, this.nom, this.dataI, this.dataF, this.joc).subscribe(llegit => this.setPeriodes(llegit));
     } else {
-      this.getPares();
+      this.getPares(this.joc);
     }
   }
 
-  getPares(): void  {
-    this.wggService.getPares().subscribe(pares => this.periodes = pares);
+  getPares(filtreJocs: string): void  {
+    this.wggService.getPares(this.user, filtreJocs).subscribe(pares => this.setPeriodes(pares));
   }
 
   constructor(private wggService: WggService) { }
 
   ngOnInit() {
-   this.getPares();
+   this.getPares(null);
   }
 
 }

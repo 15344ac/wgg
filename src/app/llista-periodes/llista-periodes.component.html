@@ -1,5 +1,5 @@
 <ul>
     <span *ngFor="let periode of periodes; let $index=index;">                    
-        <app-periode-llista [periode]="periode"></app-periode-llista>
+        <app-periode-llista *ngIf="user" [user]="user" [periode]="periode"></app-periode-llista>
     </span>    
 </ul>

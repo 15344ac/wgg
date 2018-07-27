@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Periode } from '../definicions/periode';
 import { Joc } from '../definicions/joc';
 import { WggService } from '../wgg.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-periode-llista',
@@ -11,6 +12,8 @@ import { WggService } from '../wgg.service';
 export class PeriodeLlistaComponent implements OnInit {
 
   @Input() periode: Periode;
+
+  @Input() user: string;
 
   mostra: Boolean;
 
@@ -28,11 +31,9 @@ export class PeriodeLlistaComponent implements OnInit {
 
   }
 
-
-
   ngOnInit() {
-    this.wggService.getNumeroJocs(this.periode.id).subscribe(numero => this.numeroJocs = numero);
-    this.wggService.getJocs(null, this.periode, true, false, false).subscribe(jocs => this.jocs = jocs);
+    this.wggService.getNumeroJocs(this.user, this.periode.id).subscribe(numero => this.numeroJocs = numero);
+    this.wggService.getJocs(this.user, null, this.periode, true, false, false).subscribe(jocs => this.jocs = jocs);
   }
 
 }
