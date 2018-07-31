@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let periode of periodes">      
+    <button (click)="EliminaPeriode(periode)">-</button><app-periode-edita #periodeEditat [periode]=periode></app-periode-edita>    
+  </li>
+</ul>
+<button (click)="AfegeixPeriode()">+</button>

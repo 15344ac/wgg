@@ -53,6 +53,8 @@ import {
   } from '@angular/material';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { PeriodesEditaComponent } from './periodes-edita/periodes-edita.component';
+import { PeriodeEditaComponent } from './periode-edita/periode-edita.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     DataDetallsComponent,
     PeriodeLlistaComponent,
     ParesComponent,
-    BarraNavegacioComponent
+    BarraNavegacioComponent,
+    PeriodesEditaComponent,
+    PeriodeEditaComponent
   ],
   imports: [
     BrowserAnimationsModule,

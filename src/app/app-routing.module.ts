@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: ':user', component: MainComponent, runGuardsAndResolvers: 'always'},
   { path: ':user/jocs', component: LlistaJocsComponent, runGuardsAndResolvers: 'always' },
   {path: ':user/periode/:id', component: PeriodeDetallsComponent, runGuardsAndResolvers: 'always'},
+  {path: ':user/joc/:id', component: JocDetallsComponent, runGuardsAndResolvers: 'always'}
 ];
 
 

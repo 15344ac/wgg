@@ -9,6 +9,16 @@ import { NumeroJocs } from './definicions/numeroJocs';
 
 @Injectable()
 export class WggService {
+  UpdateJoc(joc: Joc): any {
+    const url = this.getUrl('') + 'Actualitza Joc';
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    console.log(url);
+    return this.httpClient.post<Joc>(url, joc, httpOptions);
+  }
 
   getJocs(idUser: string, filtreNom: string, periode: Periode, coincidents: boolean, inclouEscenaris: boolean, estricte: boolean)
     : Observable<Joc[]> {
@@ -88,7 +98,10 @@ export class WggService {
   }
 
   getJoc(idUser: string, id: number): Observable<Joc> {
-    return null;
+    this.messageService.add('Carregat');
+    return this.httpClient.get<Periode>(this.getUrl(idUser) + '/Consulta Joc/' + id).pipe(
+      tap(periode => this.log('fetched joc')),
+      catchError(this.handleError('getJoc', null)));
   }
 
   getPeriode(idUser: string, id: number): Observable<Periode> {

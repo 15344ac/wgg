@@ -3,9 +3,24 @@
     <h2>{{ joc.titol | uppercase }} Details</h2>
     <div><span>id: </span>{{joc.id}}</div>
     <div>
+      <p>
       <label>Títol:
         <input [(ngModel)]="joc.titol" placeholder="títol"/>
       </label>
-    </div>
-  
+    </p>
+    <p>
+      <label>BGGId:
+        <input [(ngModel)]="joc.bggID" placeholder="ID BGG"/><a href="https://boardgamegeek.com/boardgame/{{joc.bggID}}" target="_blank">      
+          link</a>
+      </label>
+    </p>
+    <ul>
+      <li *ngFor="let escenari of joc.escenaris" class="Nota{{escenari.nota}}">
+        <button (click)="EliminaEscenari(escenari)">-</button><input [(ngModel)]="escenari.descripcio"/>
+          <app-periodes-edita [periodes]=escenari.periodes></app-periodes-edita>    
+      </li>
+    </ul>
+    <button (click)="AfegeixEscenari()">+</button>  
   </div>
+  <button (click)="Aplicar()">Aplicar</button>
+</div>

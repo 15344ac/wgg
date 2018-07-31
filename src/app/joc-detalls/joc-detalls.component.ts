@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { WggService} from '../wgg.service';
 import { Periode } from '../definicions/periode';
+import { Escenari } from '../definicions/escenari';
 
 @Component({
   selector: 'app-joc-detalls',
@@ -12,7 +13,7 @@ import { Periode } from '../definicions/periode';
 })
 export class JocDetallsComponent implements OnInit {
 
-@Input() joc: Joc;
+joc: Joc;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,12 +25,26 @@ export class JocDetallsComponent implements OnInit {
   }
 
   getJoc(): void  {
-    const id = +this.route.snapshot.paramMap.get('id');
-
     this.route.params.subscribe(routeParams =>      {
+    const id = routeParams.id;
     const user = routeParams.user;
     this.wggService.getJoc(user, id).subscribe(joc => this.joc = joc);
     });
+  }
+
+  EliminaEscenari(id: Escenari)  {
+    this.joc.escenaris = this.joc.escenaris.filter(escenari => escenari !== id);
+  }
+
+  AfegeixEscenari(): void {
+    this.joc.escenaris = this.joc.escenaris.concat(new Escenari());
+  }
+
+  Aplicar(): void {
+    this.wggService.UpdateJoc(this.joc).subscribe(resposta =>    {
+
+    }
+    );
   }
 
 }

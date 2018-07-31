@@ -1,6 +1,6 @@
-<ul class="jocs">
-  <li *ngFor="let j of jocs">    
-      <a href="https://boardgamegeek.com/boardgame/{{j.bggID}}" target="_blank" class="Nota{{consultaNota(j)}}">      
+<ul class="jocs">  
+  <li *ngFor="let j of jocs">            
+      <a *ngIf="permetEditar; else edicio" href="https://boardgamegeek.com/boardgame/{{j.bggID}}" target="_blank" class="Nota{{consultaNota(j)}}">      
         <details *ngIf="false; else nomestitol">
           <summary>    
           {{j.titol}}          
@@ -11,6 +11,10 @@
             {{j.titol}}            
             </ng-template>          
         </a>
+        <ng-template #edicio>
+            <a routerLink="/undefined/joc/{{j.id}}">
+              {{j.titol}}</a>
+        </ng-template>
       <ul>
         <li *ngFor="let escenari of consultaEscenaris(j)" class="Nota{{escenari.nota}}">
           {{escenari.descripcio}}
