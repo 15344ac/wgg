@@ -18,15 +18,11 @@ export class BarraNavegacioComponent implements OnInit {
   joc: string;
   @Input() user: string;
 
-  @Input()
-  set filtreJoc(filtre: string) {
-    this.joc = filtre;
+  filtraJoc() {
     this.getPeriodes();
   }
 
-  @Input()
-  set filtreNom(filtre: string)  {
-    this.nom = filtre;
+  filtraPeriode()  {
     this.getPeriodes();
   }
 
@@ -65,7 +61,11 @@ export class BarraNavegacioComponent implements OnInit {
     this.wggService.getPares(this.user, filtreJocs).subscribe(pares => this.setPeriodes(pares));
   }
 
-  constructor(private wggService: WggService) { }
+  constructor(private wggService: WggService) {
+    wggService.Actualitza.subscribe(() =>  {
+    this.getPeriodes();
+  });
+   }
 
   ngOnInit() {
    this.getPares(null);

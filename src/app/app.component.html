@@ -3,7 +3,13 @@
         
 </header>       
 <body>
-    <div *ngIf="user">
+      <br>
+                                <input type="radio" Name="idioma" value="en" [(ngModel)]="idioma"> EN
+                                <input type="radio" Name="idioma" value="es" [(ngModel)]="idioma"> ES
+                                <input type="radio" Name="idioma" value="ca" [(ngModel)]="idioma"> CA
+<br>
+{{idioma}}
+    <div *ngIf="user" class="flota">
         <ng-container *ngIf="opened; else closedTemplate">               
                 <nav>         
                         <button (click)="opened=false" class="boto-barra">X</button>

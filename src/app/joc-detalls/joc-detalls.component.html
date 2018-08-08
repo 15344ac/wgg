@@ -15,9 +15,13 @@
       </label>
     </p>
     <ul>
-      <li *ngFor="let escenari of joc.escenaris" class="Nota{{escenari.nota}}">
-        <button (click)="EliminaEscenari(escenari)">-</button><input [(ngModel)]="escenari.descripcio"/>
-          <app-periodes-edita [periodes]=escenari.periodes></app-periodes-edita>    
+      <li *ngFor="let escenari of joc.escenaris" class="Nota{{escenari.nota}}">        
+        <button (click)="EliminaEscenari(escenari)">-</button><input [(ngModel)]="escenari.descripcio"/><input [(ngModel)]="escenari.coincideix" type="checkbox">
+        <app-periodes-edita [(periodes)]=escenari.periodes></app-periodes-edita>             
+      <div *ngIf="!escenari.coincideix">
+        <app-data-detalls [data]="escenari.dataInici"></app-data-detalls>
+        <input [(ngModel)]="escenari.cadenaDataInici"/>/<input [(ngModel)]="escenari.cadenaDataFi"/>        
+      </div>
       </li>
     </ul>
     <button (click)="AfegeixEscenari()">+</button>  

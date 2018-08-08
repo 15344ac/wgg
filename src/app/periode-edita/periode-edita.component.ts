@@ -25,11 +25,13 @@ export class PeriodeEditaComponent implements OnInit {
 
   getPeriode(): void {
         const user = 'undefined';
+        if (this.IdPeriode) {
         this.wggService.getPeriode(user, this.IdPeriode).subscribe(periode =>           {
             Object.assign(this.periode, periode);
             console.log('Carregat periode joc');
           });
-  }
+        }
+      }
 
   constructor(
     private route: ActivatedRoute,

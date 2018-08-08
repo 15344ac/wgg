@@ -27,7 +27,11 @@ export class PeriodeDetallsComponent implements OnInit {
     private route: ActivatedRoute,
     private wggService: WggService,
     private location: Location
-  ) { }
+  ) {
+    wggService.Actualitza.subscribe(() =>  {
+      this.getPeriode();
+    });
+  }
 
   ngOnInit() {
     this.getPeriode();

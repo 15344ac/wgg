@@ -1,10 +1,13 @@
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { Periode } from './definicions/periode';
 import { WggService } from './wgg.service';
 import {CdkTableModule} from '@angular/cdk/table';
 import {HttpClientModule} from '@angular/common/http';
 import { ActivatedRoute, Router, NavigationEnd, PRIMARY_OUTLET } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+
 
 
 @Component({
@@ -17,6 +20,10 @@ export class AppComponent {
   events: string[] = [];
   opened = true;
   user: string;
+
+  set idioma (valor: string)  {
+    this.wggService.SetIdioma(valor);
+  }
 
   constructor(private wggService: WggService,
     private route: Router,

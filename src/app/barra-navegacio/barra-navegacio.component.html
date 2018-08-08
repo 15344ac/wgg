@@ -1,6 +1,12 @@
-<p>Filtro juego: <input type="text" [(ngModel)]="filtreJoc" placeholder="filtro" ng-required="false"/></p>
-<p>Filtro periodo: <input type="text" [(ngModel)]="filtreNom" placeholder="filtro" ng-required="false"/></p>
-<p>De:<input type="text" [(ngModel)]="filtreDataInici" placeholder="fecha" ng-required="false"/></p>
-<p>A:<input type="text" [(ngModel)]="filtreDataFi" placeholder="fecha" ng-required="false"/></p>
+<div>
+    <div class="capcalera">
+<p>Filtro juego: <input type="text" [(ngModel)]="joc" placeholder="filtro" ng-required="false"/><button (click)="filtraJoc()">O</button></p>
+<p>Filtro periodo: <input type="text" [(ngModel)]="nom" placeholder="filtro" ng-required="false"/><button (click)="filtraPeriode()">O</button></p>
+<!--<p>De:<input type="text" [(ngModel)]="filtreDataInici" placeholder="fecha" ng-required="false"/></p>
+<p>A:<input type="text" [(ngModel)]="filtreDataFi" placeholder="fecha" ng-required="false"/></p>-->
 {{user}}
-<app-llista-periodes *ngIf="user" [user]=user [periodes]=periodes></app-llista-periodes>
+    </div>
+    <div  class="llista">
+        <app-llista-periodes *ngIf="user" [user]=user [periodes]=periodes></app-llista-periodes>
+    </div>
+</div>

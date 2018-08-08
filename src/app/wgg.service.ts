@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Joc} from './definicions/joc';
@@ -9,6 +9,14 @@ import { NumeroJocs } from './definicions/numeroJocs';
 
 @Injectable()
 export class WggService {
+  idioma: string;
+  Actualitza = new EventEmitter();
+
+  SetIdioma(valor: string) {
+    this.idioma = valor;
+    this.Actualitza.emit();
+  }
+
   UpdateJoc(joc: Joc): any {
     const url = this.getUrl('') + 'Actualitza Joc';
     const httpOptions = {
@@ -24,7 +32,7 @@ export class WggService {
     : Observable<Joc[]> {
     this.messageService.add('Carregat');
 
-    let params = new HttpParams();
+    let params = new HttpParams().set('idioma', this.idioma);
 
     if (filtreNom) {
       params = params.set('nom', filtreNom);
@@ -48,7 +56,7 @@ export class WggService {
   getPeriodes(idUser: string, filtreNom: string, dataInici: string, dataFi: string, filtreJocs: string): Observable<Periode[]> {
     this.messageService.add('Carregat');
 
-    let params = new HttpParams();
+    let params = new HttpParams().set('idioma', this.idioma);
 
     if (filtreNom) {
       params = params.set('nom', filtreNom);
@@ -73,20 +81,22 @@ export class WggService {
 
   getParesPeriode(idUser: string, id: number): Observable<Periode[]> {
     console.log('Carregat');
-    return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Pare/' + id).pipe(
+    const params = new HttpParams().set('idioma', this.idioma);
+    return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Pare/' + id, {params: params}).pipe(
       tap(periodes => this.log('fetched pares')),
       catchError(this.handleError('getParesJoc', null)));
   }
 
   getPares(idUser: string, filtreJocs: string): Observable<Periode[]> {
     console.log('Carregat');
+    const params = new HttpParams().set('idioma', this.idioma);
     this.messageService.add('Carregat');
     if (filtreJocs) {
-      return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Periodes Base/' + filtreJocs).pipe(
+      return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Periodes Base/' + filtreJocs, {params: params}).pipe(
         tap(periodes => this.log(`fetched periodes`)),
         catchError(this.handleError('getPeriodesBase', [])));
     } else {
-      return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Periodes Base').pipe(
+      return this.httpClient.get<Periode[]>(this.getUrl(idUser) + '/Consulta Periodes Base', {params: params}).pipe(
         tap(periodes => this.log(`fetched periodes`)),
         catchError(this.handleError('getPeriodesBase', [])));
     }
@@ -106,7 +116,8 @@ export class WggService {
 
   getPeriode(idUser: string, id: number): Observable<Periode> {
     this.messageService.add('Carregat');
-    return this.httpClient.get<Periode>(this.getUrl(idUser) + '/Consulta Periode/' + id).pipe(
+    const params = new HttpParams().set('idioma', this.idioma);
+    return this.httpClient.get<Periode>(this.getUrl(idUser) + '/Consulta Periode/' + id, {params: params}).pipe(
       tap(periode => this.log('fetched periode')),
       catchError(this.handleError('getPeriode', null)));
   }
@@ -118,6 +129,9 @@ export class WggService {
   constructor(private messageService: MessageService,
     private httpClient: HttpClient
   ) {
+    const userLang = navigator.language;
+
+    this.idioma = userLang;
   }
 
   private log(message: string) {

@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
     private wggService: WggService) { }
 
   ngOnInit() {
-    this.getPares();
+
   }
 
   getPares(): void  {

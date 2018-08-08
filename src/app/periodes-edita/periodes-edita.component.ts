@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WggService } from '../wgg.service';
 import { Periode } from '../definicions/periode';
@@ -12,7 +12,6 @@ export class PeriodesEditaComponent implements OnInit {
 
   @Input() periodes: Periode[];
 
-
   constructor(
 
   ) { }
@@ -21,10 +20,10 @@ export class PeriodesEditaComponent implements OnInit {
   }
 
   EliminaPeriode(id: Periode)  {
-    this.periodes = this.periodes.filter(periode => periode !== id);
+    this.periodes.splice(this.periodes.indexOf(id), 1);
   }
 
   AfegeixPeriode() {
-    this.periodes = this.periodes.concat(new Periode());
+    this.periodes.push(new Periode());
   }
 }

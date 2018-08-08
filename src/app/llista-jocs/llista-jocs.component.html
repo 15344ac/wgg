@@ -17,8 +17,19 @@
         </ng-template>
       <ul>
         <li *ngFor="let escenari of consultaEscenaris(j)" class="Nota{{escenari.nota}}">
-          {{escenari.descripcio}}
+          {{escenari.descripcio}}<span class="data"  >
+              <app-data-detalls  [data]=escenari.dataInici></app-data-detalls>
+               &ensp;
+               <app-data-detalls  [data]=escenari.dataFi></app-data-detalls>
+             </span>
         </li>
-      </ul> 
+      </ul>       
+      <div *ngIf="j.escenariUnic">
+          <span class="data" *ngIf="j.escenariUnic.dataInici || j.escenariUnic.dataFi">
+              <app-data-detalls  [data]=j.escenariUnic.dataInici></app-data-detalls>
+               &ensp;
+               <app-data-detalls  [data]=j.escenariUnic.dataFi></app-data-detalls>
+             </span>
+      </div>
   </li>
 </ul>

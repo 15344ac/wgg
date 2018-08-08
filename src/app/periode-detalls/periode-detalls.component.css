@@ -1,13 +1,25 @@
 
 .enllaços
 {
-    float:left;
+    float: right;
     margin-left: 5%;
+}
+
+.esquerra
+{
+    float:left;
+}
+
+.dreta
+{
+    float:right;
 }
 
 section
 {        
-    float:left;
+    float: left;
     overflow: auto;
-    clear: both;
+    
 }
+
+

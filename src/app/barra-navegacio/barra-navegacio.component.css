@@ -1,0 +1,13 @@
+.llista
+{
+    height: 80%;
+    overflow: auto;
+    top: 25%;
+    position: relative;
+}
+
+.capcalera
+{
+    position: relative;
+    height: 20%;         
+}

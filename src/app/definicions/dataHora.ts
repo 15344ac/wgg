@@ -1,5 +1,8 @@
 export class DataHora {
-    any: number;
-    mes: number;
-    dia: number;
+    any: number = undefined;
+    mes: number = undefined;
+    dia: number = undefined;
+
+    constructor() {
+    }
 }
